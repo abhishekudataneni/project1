@@ -1,16 +1,16 @@
-import {GET_WEEK} from "../actionTypes";
+import {SET_CURRENT_USER} from "../actionTypes";
 import apiCall from "../../services/api"
-
-function getWeeks(data){
+let url = "http://localhost:3000/employee"
+function setCurrentUser(currentUser){
     return {
-        type: GET_WEEK
+        type: SET_CURRENT_USER,
+        currentUser
     }
 }
 
-export default function fetchWeeks(){
+export default function fetchCurrentUser(){
     return (dispatch) => {
         return apiCall("get",url)
-            .then(response => {dispatch(getWeeks(response)})
-            .catch(err => {console.log(err)})
+            .then(res => dispatch(setCurrentUser(res)))    
     } 
 }

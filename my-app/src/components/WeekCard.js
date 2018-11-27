@@ -1,10 +1,6 @@
 import React,{Component} from 'react';
-import axios from "axios";
-import { Card, CardTitle, Row, Col } from 'reactstrap';
 import WeekCardItem from "./WeekCardItem";
-// axios.get("https://cat-fact.herokuapp.com/facts",{ headers: { 'crossDomain': true, 'Content-Type': 'application/json'}}).then(res => {
-//     console.log(res)
-// });
+import {connect} from 'react-redux';
 
 class WeekCard extends Component {
   
@@ -12,20 +8,30 @@ class WeekCard extends Component {
         super(props);
         this.state = {  };
     }
-    
-        Week = this.props.weeks.map(val => {
-          return  <WeekCardItem key={val.id} weekDetails={val} />
-        })
+    CurrentWeek = this.props.currentUser.Name;
+        // this.props.currentUser.weeks.map((week) => 
+        //     <div>week 1</div>)
+            // <WeekCardItem key={week.id} Job={week.Job}/> )
+        
+        // PreviousWeeks = this.props.weeks.filter(val => val.id !== 0).map(val => {
+        //    let weekClass = val.id === 0 ? "current-week" : "previous-week";
+        //   return  <WeekCardItem key={val.id} weekClass={weekClass} weekDetails={val} />
+        // })
     render() {
         
         return (
             <div>
-                {this.Week}
-            </div>
-           
+                current
+                {this.props.currentUser.id}
+            </div> 
         );
     }
 }
 
-
-export default WeekCard ;
+const mapStatetoProps = (state) => {
+    console.log(state);
+    return {
+    currentUser : state.currentUser,
+            }
+    }
+ export default connect(mapStatetoProps)(WeekCard);
